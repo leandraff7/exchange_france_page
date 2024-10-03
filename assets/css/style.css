@@ -636,34 +636,76 @@ main {
     }
 }
 
+/* Responsividade para o gráfico */
 .chart-responsive {
     max-width: 80%;
-    /* Largura ajustável */
     max-height: 80vw;
-    /* Altura ajustável proporcional */
     width: 100%;
-    /* Responsivo a 100% da largura do contêiner */
     height: auto;
-    /* Altura proporcional */
     margin: 0 auto;
-    /* Centralizar o gráfico */
 }
 
 @media (min-width: 768px) {
     .chart-responsive {
         max-width: 50vw;
-        /* Gráfico maior em telas maiores */
         max-height: 50vw;
-        /* Manter proporcional em telas maiores */
     }
 }
 
 @media (min-width: 1200px) {
     .chart-responsive {
         max-width: 40vw;
-        /* Gráfico ainda maior em telas grandes */
         max-height: 40vw;
-        /* Manter proporcional */
+    }
+}
+
+/* Estilo da tabela ao lado do gráfico de pizza */
+.campaign-summary {
+    font-size: 1.4rem;
+    margin-top: 20px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.campaign-summary p {
+    margin: 5px 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+.campaign-summary strong {
+    font-weight: 700;
+    /* Título em negrito */
+    font-size: 1.3rem;
+    display: inline-block;
+    margin-right: 10px;
+    /* Espaçamento entre o título e o valor */
+}
+
+.campaign-summary .value {
+    font-size: 1.3rem;
+    text-align: right;
+    display: inline-block;
+}
+
+/* Alinhamento entre o gráfico e o resumo */
+.summary-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .summary-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .campaign-summary {
+        text-align: center;
+        padding-left: 0;
     }
 }
 
@@ -673,39 +715,83 @@ main {
     margin-bottom: 20px;
 }
 
+.text-right {
+    text-align: right;
+    font-size: 1.2rem;
+    /* Aumenta o tamanho da fonte para o texto alinhado à direita */
+}
+
 .table {
     width: 100%;
     margin-bottom: 1rem;
     background-color: transparent;
     border-collapse: collapse;
     font-size: 1.2rem;
-    /* Tamanho da fonte aumentado */
 }
 
 .table th,
 .table td {
-    padding: 1rem;
+    padding: 10px;
     text-align: center;
-    /* Centraliza o conteúdo nas células */
+    /* Centraliza o conteúdo das células */
     vertical-align: middle;
-    /* Alinha o texto verticalmente no meio */
-    border-top: 1px solid #dee2e6;
+    /* Alinha verticalmente no meio */
+    border-bottom: 1px solid #dee2e6;
+    /* Apenas borda inferior */
 }
 
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
+.table th {
     font-weight: bold;
+    background-color: #f8f9fa;
+    /* Cor de fundo para o cabeçalho */
+    text-align: center;
+    /* Alinha os títulos ao centro */
+    vertical-align: middle;
+    /* Alinha verticalmente no meio */
 }
 
-.table-bordered {
-    border: 1px solid #dee2e6;
+.table td {
+    text-align: center;
+    /* Alinha o conteúdo das células ao centro */
 }
 
-.table-bordered th,
-.table-bordered td {
-    border: 1px solid #dee2e6;
+.table .label-cell {
+    text-align: right;
+    /* Alinha à direita as células de rótulo */
+    padding-right: 10px;
+    /* Ajusta o espaçamento à direita */
 }
+
+.table .value-cell {
+    text-align: right;
+    /* Alinha à direita as células de valor */
+    padding-left: 10px;
+    /* Ajusta o espaçamento à esquerda */
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+    /* Remove a linha de borda no final da tabela */
+}
+
+.text-right {
+    text-align: right;
+    /* Alinhamento à direita, usado quando necessário */
+}
+
+/* Ajustes para títulos da última parte */
+.campaign-info td {
+    text-align: right;
+    /* Alinha à direita os valores da meta e valores arrecadados */
+    font-size: 1.1rem;
+    /* Ajuste de tamanho para se destacar */
+}
+
+.table tbody tr:last-child .value-cell {
+    font-weight: bold;
+    /* Destaque para o último valor (total) */
+}
+
 
 .campaign-info {
     text-align: center;

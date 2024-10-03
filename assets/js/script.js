@@ -72,8 +72,8 @@ $(document).ready(function() {
     const ctx = document.getElementById('donationChart').getContext('2d');
 
     // Exemplo de valor arrecadado e meta
-    const totalCampaignGoal = 10000;  // Meta de arrecadação total (R$ 10.000)
-    const amountRaised = 2900;        // Quantia arrecadada até agora
+    const totalCampaignGoal = 63448.20;  // Meta de arrecadação total (R$ 10.000)
+    const amountRaised = 0;        // Quantia arrecadada até agora
     const remainingAmount = totalCampaignGoal - amountRaised;
 
     donationChart = new Chart(ctx, {
