@@ -1,6 +1,6 @@
 # Arthur no Intercambio
 
-Welcome to **Arthur no Intercâmbio**! This personal website is dedicated to sharing my journey and raising funds for my exchange program. Visit us at [arthurnointercambio.com](http://arthurnointercambio.com).
+Welcome to **Arthur no Intercâmbio**! This personal website is dedicated to sharing my journey and raising funds for my exchange program. Visit us at [leandranointercambio.com](http://leandranointercambio.com).
 
 ## About the Project
 
