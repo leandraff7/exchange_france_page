@@ -148,7 +148,7 @@ $(document).ready(function () {
                 if (label) {
                   label += ': ';
                 }
-                label += tooltipItem.raw + ' R$';
+                label += 'R$ ' + tooltipItem.raw ;
                 return label;
               }
             },
