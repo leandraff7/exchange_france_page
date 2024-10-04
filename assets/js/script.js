@@ -1,5 +1,5 @@
 // window scroll
-$(window).on('scroll', function() {
+$(window).on('scroll', function () {
   var scrollTop = $(window).scrollTop();
   if (scrollTop >= 100) {
     $('body').addClass('fixed-header');
@@ -9,7 +9,7 @@ $(window).on('scroll', function() {
 });
 
 // Document Ready
-$(document).ready(function() {
+$(document).ready(function () {
   // Owl Carousel
   $('.owl-carousel').owlCarousel({
     loop: true,
@@ -18,8 +18,8 @@ $(document).ready(function() {
     autoplay: true,
     autoplayTimeout: 2000,
     responsive: {
-      0: {items: 1},
-      900: {items: 2},
+      0: { items: 1 },
+      900: { items: 2 },
     }
   });
 
@@ -32,7 +32,7 @@ $(document).ready(function() {
   // Language Toggle Functionality
   let currentLanguage = 'pt';  // Default language is Portuguese
 
-  $('#language-toggle').on('click', function() {
+  $('#language-toggle').on('click', function () {
     if (currentLanguage === 'pt') {
       currentLanguage = 'en';
       $(this).text('Português');  // Change button text to Portuguese
@@ -59,22 +59,24 @@ $(document).ready(function() {
   // Initially set to Portuguese
   switchLanguage('pt');
 
-  // Função para copiar o email da Chave PIX
-  $('#copy-button').on('click', function() {
-    var pixEmail = $('#pix-email').text();  // Obtém o email a ser copiado
+  // Oculta as mensagens de sucesso ao carregar a página
+  $('#copy-success, #copy-success-copy-paste, #copy-success-paypal').hide();
+
+  $('#copy-button').on('click', function () {
+    console.log("Copiando Chave PIX");
+    var pixEmail = $('#pix-email').text();
     copyToClipboard(pixEmail, 'copy-success');
   });
 
-  // Função para copiar o código do PIX Copia e Cola
-  $('#copy-button-copy-paste').on('click', function() {
-    var pixCopyPaste =
-        $('#pix-copy-paste').text();  // Obtém o código do PIX Copia e Cola
+  $('#copy-button-copy-paste').on('click', function () {
+    console.log("Copiando PIX Copia e Cola");
+    var pixCopyPaste = $('#pix-copy-paste').text();
     copyToClipboard(pixCopyPaste, 'copy-success-copy-paste');
   });
 
-  // Função para copiar o email do PayPal
-  $('#copy-button-paypal').on('click', function() {
-    var paypalEmail = $('#paypal-email').text();  // Obtém o email do PayPal
+  $('#copy-button-paypal').on('click', function () {
+    console.log("Copiando PayPal Email");
+    var paypalEmail = $('#paypal-email').text();
     copyToClipboard(paypalEmail, 'copy-success-paypal');
   });
 
@@ -83,16 +85,13 @@ $(document).ready(function() {
     if (navigator.clipboard && window.isSecureContext) {
       // Usa a API do navegador moderna para copiar
       navigator.clipboard.writeText(text)
-          .then(function() {
-            // Exibe mensagem de sucesso
-            document.getElementById(successElementId).style.display = 'block';
-            setTimeout(function() {
-              document.getElementById(successElementId).style.display = 'none';
-            }, 2000);
-          })
-          .catch(function(error) {
-            console.error('Falha ao copiar:', error);
-          });
+        .then(function () {
+          // Exibe mensagem de sucesso
+          $('#' + successElementId).fadeIn().delay(2000).fadeOut();
+        })
+        .catch(function (error) {
+          console.error('Falha ao copiar:', error);
+        });
     } else {
       // Método de fallback para navegadores que não suportam Clipboard API
       const tempInput = document.createElement('input');
@@ -104,10 +103,7 @@ $(document).ready(function() {
       document.body.removeChild(tempInput);
 
       // Exibe mensagem de sucesso
-      document.getElementById(successElementId).style.display = 'block';
-      setTimeout(function() {
-        document.getElementById(successElementId).style.display = 'none';
-      }, 2000);
+      $('#' + successElementId).fadeIn().delay(2000).fadeOut();
     }
   }
 
@@ -141,13 +137,13 @@ $(document).ready(function() {
         plugins: {
           legend: {
             labels: {
-              font: {size: 18}  // Aumenta o tamanho das labels da legenda
+              font: { size: 18 }  // Aumenta o tamanho das labels da legenda
             },
             onClick: null  // Desativa a funcionalidade de clicar nas legendas
           },
           tooltip: {
             callbacks: {
-              label: function(tooltipItem) {
+              label: function (tooltipItem) {
                 let label = tooltipItem.label || '';
                 if (label) {
                   label += ': ';
@@ -156,11 +152,11 @@ $(document).ready(function() {
                 return label;
               }
             },
-            titleFont: {size: 20},
-            bodyFont: {size: 18}
+            titleFont: { size: 20 },
+            bodyFont: { size: 18 }
           },
           datalabels: {
-            formatter: function(value, context) {
+            formatter: function (value, context) {
               let sum = 0;
               let dataArr = context.chart.data.datasets[0].data;
               dataArr.map(data => sum += data);
