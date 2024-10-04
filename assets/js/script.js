@@ -4,7 +4,7 @@ $(window).on('scroll', function() {
   if (scrollTop >= 100) {
     $('body').addClass('fixed-header');
   } else {
-    $('body').removeClass('fixed-header')
+    $('body').removeClass('fixed-header');
   }
 });
 
@@ -26,7 +26,7 @@ $(document).ready(function() {
   // One Page Scroll
   $.scrollIt({
     easing: 'linear',  // the easing function for animation
-    topOffset: -70     // offste (in px) for fixed top navigation
+    topOffset: -70     // offset (in px) for fixed top navigation
   });
 
   // Language Toggle Functionality
@@ -59,6 +59,58 @@ $(document).ready(function() {
   // Initially set to Portuguese
   switchLanguage('pt');
 
+  // Função para copiar o email da Chave PIX
+  $('#copy-button').on('click', function() {
+    var pixEmail = $('#pix-email').text();  // Obtém o email a ser copiado
+    copyToClipboard(pixEmail, 'copy-success');
+  });
+
+  // Função para copiar o código do PIX Copia e Cola
+  $('#copy-button-copy-paste').on('click', function() {
+    var pixCopyPaste =
+        $('#pix-copy-paste').text();  // Obtém o código do PIX Copia e Cola
+    copyToClipboard(pixCopyPaste, 'copy-success-copy-paste');
+  });
+
+  // Função para copiar o email do PayPal
+  $('#copy-button-paypal').on('click', function() {
+    var paypalEmail = $('#paypal-email').text();  // Obtém o email do PayPal
+    copyToClipboard(paypalEmail, 'copy-success-paypal');
+  });
+
+  // Função genérica para copiar texto para a área de transferência
+  function copyToClipboard(text, successElementId) {
+    if (navigator.clipboard && window.isSecureContext) {
+      // Usa a API do navegador moderna para copiar
+      navigator.clipboard.writeText(text)
+          .then(function() {
+            // Exibe mensagem de sucesso
+            document.getElementById(successElementId).style.display = 'block';
+            setTimeout(function() {
+              document.getElementById(successElementId).style.display = 'none';
+            }, 2000);
+          })
+          .catch(function(error) {
+            console.error('Falha ao copiar:', error);
+          });
+    } else {
+      // Método de fallback para navegadores que não suportam Clipboard API
+      const tempInput = document.createElement('input');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      tempInput.setSelectionRange(0, 99999);  // Para dispositivos móveis
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      // Exibe mensagem de sucesso
+      document.getElementById(successElementId).style.display = 'block';
+      setTimeout(function() {
+        document.getElementById(successElementId).style.display = 'none';
+      }, 2000);
+    }
+  }
+
   // Função para atualizar as labels do gráfico
   function updateChartLabels(raisedLabel, remainingLabel) {
     donationChart.data.labels = [raisedLabel, remainingLabel];
@@ -66,14 +118,13 @@ $(document).ready(function() {
   }
 
   // Gráfico de Pizza (Chart.js)
-  let donationChart;  // Declare variable outside the condition to access it
-                      // globally
+  let donationChart;  // Declaração global para o gráfico
   if (document.getElementById('donationChart')) {
     const ctx = document.getElementById('donationChart').getContext('2d');
 
     // Exemplo de valor arrecadado e meta
-    const totalCampaignGoal = 63448.20;  // Meta de arrecadação total (R$ 10.000)
-    const amountRaised = 0;        // Quantia arrecadada até agora
+    const totalCampaignGoal = 68378.20;  // Meta de arrecadação total
+    const amountRaised = 0;              // Quantia arrecadada até agora
     const remainingAmount = totalCampaignGoal - amountRaised;
 
     donationChart = new Chart(ctx, {
@@ -81,9 +132,7 @@ $(document).ready(function() {
       data: {
         labels: ['Arrecadado', 'Faltante'],  // Legendas para as fatias
         datasets: [{
-          data: [
-            amountRaised, remainingAmount
-          ],  // Quantia arrecadada e o que falta
+          data: [amountRaised, remainingAmount],    // Dados para o gráfico
           backgroundColor: ['#002654', '#FF0000'],  // Cores das fatias
         }]
       },
@@ -92,12 +141,9 @@ $(document).ready(function() {
         plugins: {
           legend: {
             labels: {
-              font: {
-                size: 18  // Aumentar tamanho das labels da legenda
-              }
+              font: {size: 18}  // Aumenta o tamanho das labels da legenda
             },
             onClick: null  // Desativa a funcionalidade de clicar nas legendas
-                           // para esconder fatias
           },
           tooltip: {
             callbacks: {
@@ -110,27 +156,20 @@ $(document).ready(function() {
                 return label;
               }
             },
-            titleFont: {
-              size: 20  // Aumenta o tamanho do título no tooltip
-            },
-            bodyFont: {
-              size: 18  // Aumenta o tamanho do texto dentro do tooltip
-            }
+            titleFont: {size: 20},
+            bodyFont: {size: 18}
           },
           datalabels: {
             formatter: function(value, context) {
               let sum = 0;
               let dataArr = context.chart.data.datasets[0].data;
-              dataArr.map(data => {
-                sum += data;
-              });
-              let percentage = (value * 100 / sum).toFixed(2) +
-                  '%';            // Calcula a porcentagem
-              return percentage;  // Exibe a porcentagem
+              dataArr.map(data => sum += data);
+              let percentage = (value * 100 / sum).toFixed(2) + '%';
+              return percentage;  // Exibe a porcentagem nas fatias
             },
             color: '#fff',  // Cor do texto dentro das fatias
             font: {
-              size: 20,  // Tamanho da fonte das porcentagens
+              size: 20,  // Tamanho da fonte
               weight: 'bold'
             }
           }
