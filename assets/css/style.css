@@ -504,6 +504,182 @@ main {
     padding-left: 15px;
 }
 
+
+/* Estilos para as cores de fundo de cada caixa */
+.donation-box.bg-1 {
+    background-color: #002a5c; /* Azul escuro para QR Code PIX */
+    color: #fff;
+}
+
+.donation-box.bg-2 {
+    background-color: #ffffff; /* Fundo branco para Chave PIX */
+    color: #000;
+    border: 1px solid #000;
+}
+
+.donation-box.bg-3 {
+    background-color: #e63946; /* Vermelho para PIX Copia e Cola */
+    color: #fff;
+}
+
+/* Estilos adicionais para outras caixas */
+.donation-box.bg-4 {
+    background-color: #002a5c; /* Azul escuro para WISE QRCODE e Milhas */
+    color: #fff;
+}
+
+.donation-box.bg-5 {
+    background-color: #ffffff; /* Fundo branco para Conta Wise e Paypal */
+    color: #000;
+    border: 1px solid #000;
+}
+
+.donation-box.bg-6 {
+    background-color: #f1f1f1; /* Fundo cinza claro para Conta Nomad e TED */
+    color: #000;
+}
+
+.qr-code-img {
+    max-height: 80%;
+    max-width: 80%;
+    object-fit: contain;
+    margin-top: 10px;
+}
+
+/* Para telas menores, aumenta o tamanho do QR Code */
+@media (max-width: 768px) {
+    .qr-code-img {
+        max-height: 80%;
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 576px) {
+    .qr-code-img {
+        max-height: 80%;
+        max-width: 80%;
+    }
+}
+
+/* Tamanho e alinhamento da caixa de doação */
+.donation-box {
+    max-width: 80%;
+    width: 80%;
+    padding: 2px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+/* Estilos para o texto e título */
+.donation-box h5 {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.donation-box p, .donation-box .bank-details {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para os botões de copiar */
+.donation-box .btn {
+    padding: 8px 8px;
+    font-size: 1.3rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+#copy-success, #copy-success-copy-paste, #copy-success-paypal {
+    display: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #28a745;
+    margin-top: 5px;
+}
+
+/* Alinhamento do texto dentro das caixas */
+.text-light {
+    color: #f8f9fa !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .donation-box {
+        padding: 15px;
+    }
+}
+
+/* Aumentar o tamanho da fonte */
+.donation-box h5 {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.2rem; /* Aumentar o tamanho da fonte do título */
+}
+
+.donation-box p, .donation-box .bank-details, #pix-email, #paypal-email {
+    font-size: 1.2rem; /* Aumentar o tamanho da fonte do parágrafo */
+}
+
+/* Estilos para o texto de sucesso */
+#copy-success, #copy-success-copy-paste, #copy-success-paypal {
+    display: block;
+    font-size: 0.9rem; /* Ajustar o tamanho da fonte */
+    color: #28a745;
+    margin-top: 10px;
+    text-align: center; /* Centralizar o texto */
+}
+
+/* Estilos para os botões de copiar */
+.donation-box .btn {
+    padding: 10px 16px;
+    font-size: 1rem; /* Aumentar o tamanho da fonte dos botões */
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* Alinhamento e espaçamento */
+.donation-box {
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px; /* Espaçamento entre os elementos */
+}
+
+/* Estilo para a seção TED */
+.donation-box.bg-3 ul {
+    list-style-type: none; /* Remove os marcadores da lista */
+    padding: 0;
+    margin: 0;
+}
+
+.donation-box.bg-3 li {
+    margin-bottom: 10px; /* Espaçamento entre cada item */
+}
+
+.donation-box.bg-3 li span:first-child {
+    font-weight: bold; /* Destaca o nome do banco */
+    display: block;
+    font-size: 1.2rem; /* Aumenta o tamanho da fonte do banco */
+}
+
+.donation-box.bg-3 li span.bank-details {
+    font-size: 1.2rem; /* Tamanho de fonte para os detalhes da agência e conta */
+    color: #f8f9fa; /* Ajusta a cor para contraste */
+    display: block;
+    margin-top: 4px;
+}
+
 /* Portfolio */
 .portfolio-box .portfolio-img {
     position: relative;
