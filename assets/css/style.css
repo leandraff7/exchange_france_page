@@ -152,6 +152,15 @@ a:hover {
     }
 }
 
+.lang-pt .nav-link {
+    letter-spacing: 1px; /* Reduz o espaçamento entre letras */
+}
+
+/* Reduza o padding entre os itens do menu */
+.main-header .navbar-nav>li {
+    padding: 0 5px; /* Reduz o espaçamento horizontal entre os itens */
+}
+
 .fixed-header .main-header {
     background: #A3DFDE;
     backdrop-filter: blur(10px);
