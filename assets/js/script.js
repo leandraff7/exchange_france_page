@@ -120,7 +120,7 @@ $(document).ready(function () {
 
     // Exemplo de valor arrecadado e meta
     const totalCampaignGoal = 75669.00;  // Meta de arrecadação total
-    const amountRaised = 67061.71;              // Quantia arrecadada até agora
+    const amountRaised = 67561.71;              // Quantia arrecadada até agora
     const remainingAmount = parseFloat((totalCampaignGoal - amountRaised).toFixed(2));  // Quantia faltante
 
     donationChart = new Chart(ctx, {
