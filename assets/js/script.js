@@ -114,22 +114,30 @@ $(document).ready(function () {
   }
 
   // Gráfico de Pizza (Chart.js)
-  let donationChart;  // Declaração global para o gráfico
+  let donationChart; // Declaração global para o gráfico
   if (document.getElementById('donationChart')) {
     const ctx = document.getElementById('donationChart').getContext('2d');
-
+  
     // Exemplo de valor arrecadado e meta
-    const totalCampaignGoal = 76424.11;  // Meta de arrecadação total
-    const amountRaised = 76190.67;              // Quantia arrecadada até agora
-    const remainingAmount = parseFloat((totalCampaignGoal - amountRaised).toFixed(2));  // Quantia faltante
-
+    const totalCampaignGoal = 76424.11; // Meta de arrecadação total
+    const amountRaised = 77190.67; // Quantia arrecadada até agora
+  
+    // Ajustar o cálculo para o valor faltante
+    const remainingAmount = Math.max(0, parseFloat((totalCampaignGoal - amountRaised).toFixed(2))); // Garante que nunca será negativo
+  
+    // Calcular porcentagens ajustadas
+    const arrecadadoPercentage = (amountRaised / totalCampaignGoal) * 100;
+    const faltantePercentage = remainingAmount > 0 ? (remainingAmount / totalCampaignGoal) * 100 : 0;
+  
+    // Dados para o gráfico
     donationChart = new Chart(ctx, {
-      type: 'pie',  // Tipo do gráfico: pizza
+      type: 'pie', // Tipo do gráfico: pizza
       data: {
-        labels: ['Arrecadado', 'Faltante'],  // Legendas para as fatias
+        labels: ['Arrecadado', 'Faltante'], // Legendas para as fatias
         datasets: [{
-          data: [amountRaised, remainingAmount],    // Dados para o gráfico
-          backgroundColor: ['#002654', '#FF0000'],  // Cores das fatias
+          data: [arrecadadoPercentage, faltantePercentage], // Dados em porcentagem ajustada
+          backgroundColor: ['#002654', '#FF0000'], // Cores das fatias
+          rawData: [amountRaised, remainingAmount] // Valores reais
         }]
       },
       options: {
@@ -137,19 +145,17 @@ $(document).ready(function () {
         plugins: {
           legend: {
             labels: {
-              font: { size: 18 }  // Aumenta o tamanho das labels da legenda
+              font: { size: 18 } // Aumenta o tamanho das labels da legenda
             },
-            onClick: null  // Desativa a funcionalidade de clicar nas legendas
+            onClick: null // Desativa a funcionalidade de clicar nas legendas
           },
           tooltip: {
             callbacks: {
               label: function (tooltipItem) {
-                let label = tooltipItem.label || '';
-                if (label) {
-                  label += ': ';
-                }
-                label += 'R$ ' + tooltipItem.raw ;
-                return label;
+                const rawData = tooltipItem.dataset.rawData; // Acessa os valores reais
+                const value = rawData[tooltipItem.dataIndex]; // Pega o valor correspondente
+                const label = tooltipItem.label || '';
+                return `${label}: R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
               }
             },
             titleFont: { size: 20 },
@@ -157,21 +163,19 @@ $(document).ready(function () {
           },
           datalabels: {
             formatter: function (value, context) {
-              let sum = 0;
-              let dataArr = context.chart.data.datasets[0].data;
-              dataArr.map(data => sum += data);
-              let percentage = (value * 100 / sum).toFixed(2) + '%';
-              return percentage;  // Exibe a porcentagem nas fatias
+              const label = context.chart.data.labels[context.dataIndex];
+              const percentage = value.toFixed(2) + '%';
+              return `${label}: ${percentage}`; // Exibe a porcentagem ajustada nas fatias
             },
-            color: '#fff',  // Cor do texto dentro das fatias
+            color: '#fff', // Cor do texto dentro das fatias
             font: {
-              size: 20,  // Tamanho da fonte
+              size: 20, // Tamanho da fonte
               weight: 'bold'
             }
           }
         }
       },
-      plugins: [ChartDataLabels]  // Ativa o plugin de DataLabels
+      plugins: [ChartDataLabels] // Ativa o plugin de DataLabels
     });
-  }
+  }  
 });
